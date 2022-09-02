@@ -195,7 +195,7 @@ namespace AddressBookSystem
             {
                 if (People.Contains(person))
                 {
-                    dict.Add(firstName, People); // it will add the unique contact only and not the duplicate 
+                    dict.Add(firstName, People); // it will add the unique contact only and not the duplicate
                 }
             }
         }
@@ -208,6 +208,17 @@ namespace AddressBookSystem
                     Console.WriteLine("-------------------------------------------");
                     printContact(contact);
                 }
+            }
+        }
+        public void SearchContact() // this method is used to search a contact based on city or state
+        {
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("Enter the City or State to search contact: ");
+            string result = Console.ReadLine();
+            foreach (Person person in People.FindAll(e => e.Address[1].Equals(result) || e.Address[2].Equals(result)))
+            {
+                Console.WriteLine("-------------------------------------------");
+                printContact(person);
             }
         }
     }
