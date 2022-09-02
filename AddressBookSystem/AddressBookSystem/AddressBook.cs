@@ -8,7 +8,8 @@ namespace AddressBookSystem
 {
     class Person
     {
-       
+
+        
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
@@ -18,7 +19,7 @@ namespace AddressBookSystem
     internal class AddressBook
     {
         public List<Person> People = new List<Person>();
-        public void addContact() 
+        public void addContact()
         {
             Person person = new Person(); 
             Console.WriteLine("-------------------------------------------");
@@ -42,7 +43,7 @@ namespace AddressBookSystem
             person.Address = add;
             People.Add(person); 
         }
-        public void printContact(Person person) 
+        public void printContact(Person person)
         {
             Console.WriteLine("Full name : " + person.FirstName + " " + person.LastName);
             Console.WriteLine("Mobile number : " + person.PhoneNumber);
@@ -58,7 +59,7 @@ namespace AddressBookSystem
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Following is your Contact List:");
-                foreach (var person in People) 
+                foreach (var person in People)
                 {
                     Console.WriteLine("-------------------------------------------");
                     printContact(person);
@@ -81,12 +82,12 @@ namespace AddressBookSystem
                 findContact = Console.ReadLine(); 
                 foreach (var person in People) 
                 {
-                    if (findContact == person.FirstName) 
+                    if (findContact.ToLower() == person.FirstName.ToLower())
                     {
                         Console.WriteLine("1 for First Name.\n2 for Last Name.\n3 for Mobile number.\n 4 for Email ID.");
                         Console.WriteLine("5 for Address.\n6 for City.\n7 for State.\n8 for Zipcode. ");
                         Console.WriteLine("Please enter option number: ");
-                        option = int.Parse(Console.ReadLine()); 
+                        option = int.Parse(Console.ReadLine());
                         switch (option)
                         {
                             case 1:
@@ -140,16 +141,16 @@ namespace AddressBookSystem
                 Console.WriteLine("Address Book is empty.");
             }
         }
-        public void deleteContact() 
+        public void deleteContact()
         {
             if (People.Count != 0)
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Enter the first name you want to delete : ");
-                string deleteContact = Console.ReadLine();
+                string deleteContact = Console.ReadLine(); 
                 for (int i = 0; i < People.Count; i++)
                 {
-                    if (deleteContact.ToLower() == People[i].FirstName.ToLower())
+                    if (deleteContact.ToLower() == People[i].FirstName.ToLower()) 
                     {
                         People.RemoveAt(i);
                         Console.WriteLine("Contact is deleted.");
@@ -170,4 +171,3 @@ namespace AddressBookSystem
         }
     }
 }
-
