@@ -13,10 +13,7 @@ namespace AddressBookSystem
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string ZipCode { get; set; }
+        public string[] Address { get; set; }
     }
     internal class AddressBook
     {
@@ -39,14 +36,16 @@ namespace AddressBookSystem
             person.PhoneNumber = Console.ReadLine();
             Console.Write("Enter the Email ID: ");
             person.Email = Console.ReadLine();
+            string[] add = new string[4];
             Console.Write("Enter the Address: ");
-            person.Address = Console.ReadLine();
+            add[0] = Console.ReadLine();
             Console.Write("Enter the City: ");
-            person.City = Console.ReadLine();
+            add[1] = Console.ReadLine();
             Console.Write("Enter the State: ");
-            person.State = Console.ReadLine();
+            add[2] = Console.ReadLine();
             Console.Write("Enter the Zipcode: ");
-            person.ZipCode = Console.ReadLine();
+            add[3] = Console.ReadLine();
+            person.Address = add;
             People.Add(person); // with add method we are adding the contact in list People
         }
         public void printContact(Person person) // in this method, we are printing all the details
@@ -54,10 +53,10 @@ namespace AddressBookSystem
             Console.WriteLine("Full name : " + person.FirstName + " " + person.LastName);
             Console.WriteLine("Mobile number : " + person.PhoneNumber);
             Console.WriteLine("Email ID : " + person.Email);
-            Console.WriteLine("Address : " + person.Address);
-            Console.WriteLine("City : " + person.City);
-            Console.WriteLine("State : " + person.State);
-            Console.WriteLine("Zipcode : " + person.ZipCode);
+            Console.WriteLine("Address : " + person.Address[0]);
+            Console.WriteLine("City : " + person.Address[1]);
+            Console.WriteLine("State : " + person.Address[2]);
+            Console.WriteLine("Zipcode : " + person.Address[3]);
         }
         public Boolean checkDuplicate(string firstName)// this method is used to check whether the name is already present in list or not
         {
@@ -126,19 +125,19 @@ namespace AddressBookSystem
                                 break;
                             case 5:
                                 Console.Write("Enter the Address: ");
-                                person.Address = Console.ReadLine();
+                                person.Address[0] = Console.ReadLine();
                                 break;
                             case 6:
                                 Console.Write("Enter the City: ");
-                                person.City = Console.ReadLine();
+                                person.Address[1] = Console.ReadLine();
                                 break;
                             case 7:
                                 Console.Write("Enter the State: ");
-                                person.State = Console.ReadLine();
+                                person.Address[2] = Console.ReadLine();
                                 break;
                             case 8:
                                 Console.Write("Enter the Zipcode: ");
-                                person.ZipCode = Console.ReadLine();
+                                person.Address[3] = Console.ReadLine();
                                 break;
                             default:
                                 Console.WriteLine("Wrong input");
@@ -196,7 +195,7 @@ namespace AddressBookSystem
             {
                 if (People.Contains(person))
                 {
-                    dict.Add(firstName, People); // it will add the unique contact only and not the duplicate
+                    dict.Add(firstName, People); // it will add the unique contact only and not the duplicate 
                 }
             }
         }
