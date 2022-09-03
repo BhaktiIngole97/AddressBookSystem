@@ -8,7 +8,7 @@ namespace AddressBookSystem
 {
     class Person
     {
-        //here the values are assign to below variables and we are getting the value from console when addContact method is called
+        
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
@@ -17,16 +17,16 @@ namespace AddressBookSystem
     }
     internal class AddressBook
     {
-        public List<Person> People = new List<Person>(); // object is created of list class of type Person
+        public List<Person> People = new List<Person>(); 
         Dictionary<string, List<Person>> dict = new Dictionary<string, List<Person>>();
-        public void addContact() // with this method the values are taken from user through console
+        public void addContact() 
         {
-            Person person = new Person(); // creating a object of person class to assign the values received from user 
+            Person person = new Person(); 
             Console.WriteLine("-------------------------------------------");
             Console.Write("Enter the First Name: ");
             person.FirstName = Console.ReadLine();
-            bool check = checkDuplicate(person.FirstName); // check will store the true or false value returned from method
-            if (check) // if value is true then the name is already exits and will come out of method
+            bool check = checkDuplicate(person.FirstName); 
+            if (check) 
             {
                 return;
             }
@@ -46,9 +46,9 @@ namespace AddressBookSystem
             Console.Write("Enter the Zipcode: ");
             add[3] = Console.ReadLine();
             person.Address = add;
-            People.Add(person); // with add method we are adding the contact in list People
+            People.Add(person); 
         }
-        public void printContact(Person person) // in this method, we are printing all the details
+        public void printContact(Person person) 
         {
             Console.WriteLine("Full name : " + person.FirstName + " " + person.LastName);
             Console.WriteLine("Mobile number : " + person.PhoneNumber);
@@ -58,7 +58,7 @@ namespace AddressBookSystem
             Console.WriteLine("State : " + person.Address[2]);
             Console.WriteLine("Zipcode : " + person.Address[3]);
         }
-        public Boolean checkDuplicate(string firstName)// this method is used to check whether the name is already present in list or not
+        public Boolean checkDuplicate(string firstName)
         {
             foreach (var person in People)
             {
@@ -76,7 +76,7 @@ namespace AddressBookSystem
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Following is your Contact List:");
-                foreach (var person in People) // using foreach loop, it will print the contact stored in People list one by one by calling printContact method
+                foreach (var person in People)
                 {
                     Console.WriteLine("-------------------------------------------");
                     printContact(person);
@@ -88,23 +88,23 @@ namespace AddressBookSystem
                 Console.WriteLine("Address Book is empty.");
             }
         }
-        public void editContact() //in this method, the contact is edited based on first name
+        public void editContact()
         {
             string findContact;
             int option;
-            if (People.Count != 0) //in this if condition it will check if there is any contact in list 
+            if (People.Count != 0)
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Enter the first name you want to edit : ");
-                findContact = Console.ReadLine(); // here the first name is store of which user want to edit the contact
-                foreach (var person in People) // using foreach loop we are checking if the first name is present in list or not
+                findContact = Console.ReadLine();
+                foreach (var person in People)
                 {
-                    if (findContact.ToLower() == person.FirstName.ToLower()) // if the first name is present the it will go inside if statement and ask option
+                    if (findContact.ToLower() == person.FirstName.ToLower())
                     {
                         Console.WriteLine("1 for First Name.\n2 for Last Name.\n3 for Mobile number.\n 4 for Email ID.");
                         Console.WriteLine("5 for Address.\n6 for City.\n7 for State.\n8 for Zipcode. ");
                         Console.WriteLine("Please enter option number: ");
-                        option = int.Parse(Console.ReadLine()); // here the option value is store of which field user want to edit
+                        option = int.Parse(Console.ReadLine()); 
                         switch (option)
                         {
                             case 1:
@@ -145,48 +145,48 @@ namespace AddressBookSystem
                         }
                         return;
                     }
-                    else // if the condition becomes false then it will print below message
+                    else 
                     {
                         Console.WriteLine("-------------------------------------------");
                         Console.WriteLine("Enter a valid name.");
                     }
                 }
             }
-            else // if the condition becomes false then it will print below message
+            else 
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Address Book is empty.");
             }
         }
-        public void deleteContact() //In this method, a contact is deleted based on the first name
+        public void deleteContact() 
         {
             if (People.Count != 0)
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Enter the first name you want to delete : ");
-                string deleteContact = Console.ReadLine(); //from user first name is taken to delete the contact
-                for (int i = 0; i < People.Count; i++) // for loop is used to find the name in list
+                string deleteContact = Console.ReadLine(); 
+                for (int i = 0; i < People.Count; i++) 
                 {
-                    if (deleteContact.ToLower() == People[i].FirstName.ToLower()) // condition is checked whether the user given name with any present name in list
+                    if (deleteContact.ToLower() == People[i].FirstName.ToLower()) 
                     {
-                        People.RemoveAt(i); //if name is present in list then that contact is removed from list
+                        People.RemoveAt(i);
                         Console.WriteLine("Contact is deleted.");
 
                     }
-                    else // if the condition becomes false then it will print below message
+                    else 
                     {
                         Console.WriteLine("-------------------------------------------");
                         Console.WriteLine("Enter a valid name.");
                     }
                 }
             }
-            else // if the condition becomes false then it will print below message
+            else 
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Address Book is empty.");
             }
         }
-        public void AddUniqueContact() // this method is used to store the contact in dictionary so it will have unique contacts
+        public void AddUniqueContact() 
         {
             Console.WriteLine("-------------------------------------------");
             Console.Write("Enter the First Name you want to add in Unique Contact Book: ");
@@ -195,11 +195,11 @@ namespace AddressBookSystem
             {
                 if (People.Contains(person))
                 {
-                    dict.Add(firstName, People); // it will add the unique contact only and not the duplicate
+                    dict.Add(firstName, People); 
                 }
             }
         }
-        public void displayUniqueContact() //this method is used to display the unique contacts
+        public void displayUniqueContact() 
         {
             foreach (var item in dict)
             {
@@ -210,7 +210,7 @@ namespace AddressBookSystem
                 }
             }
         }
-        public void SearchContact() // this method is used to search a contact based on city or state
+        public void SearchContact()
         {
             Console.WriteLine("-------------------------------------------");
             Console.WriteLine("Enter the City or State to search contact: ");
@@ -221,7 +221,7 @@ namespace AddressBookSystem
                 printContact(person);
             }
         }
-        public void ViewPersonByCityState() // this method is used to create dictionary of city and state wise
+        public void ViewPersonByCityState()
         {
             Dictionary<string, List<Person>> CityAddressBook = new Dictionary<string, List<Person>>();
             Dictionary<string, List<Person>> StateAddressBook = new Dictionary<string, List<Person>>();
@@ -239,7 +239,7 @@ namespace AddressBookSystem
                     {
                         CityAddressBook[city].Add(person);
                     }
-                    foreach (var person in CityAddressBook) // it will print CityAddressBood dictionary
+                    foreach (var person in CityAddressBook) 
                     {
                         foreach (var item in person.Value)
                         {
@@ -259,7 +259,7 @@ namespace AddressBookSystem
                     {
                         StateAddressBook[state].Add(person);
                     }
-                    foreach (var person in StateAddressBook)// it will print StateAddressBood dictionary
+                    foreach (var person in StateAddressBook)
                     {
                         foreach (var item in person.Value)
                         {
@@ -275,6 +275,15 @@ namespace AddressBookSystem
                     break;
             }
         }
+        public void SortContacts() 
+        {
+            foreach (Person person in People.OrderBy(name => name.FirstName))
+            {
+                Console.WriteLine("-------------------------------------------");
+                printContact(person);
+            }
+        }
     }
 }
+
 
