@@ -17,11 +17,11 @@ namespace AddressBookSystem
     }
     internal class AddressBook
     {
-        public List<Person> People = new List<Person>(); 
+        public List<Person> People = new List<Person>();
         Dictionary<string, List<Person>> dict = new Dictionary<string, List<Person>>();
         public void addContact() 
         {
-            Person person = new Person();
+            Person person = new Person(); 
             Console.WriteLine("-------------------------------------------");
             Console.Write("Enter the First Name: ");
             person.FirstName = Console.ReadLine();
@@ -99,12 +99,12 @@ namespace AddressBookSystem
                 findContact = Console.ReadLine(); 
                 foreach (var person in People)
                 {
-                    if (findContact.ToLower() == person.FirstName.ToLower()) 
+                    if (findContact.ToLower() == person.FirstName.ToLower())
                     {
                         Console.WriteLine("1 for First Name.\n2 for Last Name.\n3 for Mobile number.\n 4 for Email ID.");
                         Console.WriteLine("5 for Address.\n6 for City.\n7 for State.\n8 for Zipcode. ");
                         Console.WriteLine("Please enter option number: ");
-                        option = int.Parse(Console.ReadLine());
+                        option = int.Parse(Console.ReadLine()); 
                         switch (option)
                         {
                             case 1:
@@ -152,22 +152,22 @@ namespace AddressBookSystem
                     }
                 }
             }
-            else
+            else 
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Address Book is empty.");
             }
         }
-        public void deleteContact()
+        public void deleteContact() 
         {
             if (People.Count != 0)
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Enter the first name you want to delete : ");
                 string deleteContact = Console.ReadLine(); 
-                for (int i = 0; i < People.Count; i++) 
+                for (int i = 0; i < People.Count; i++)
                 {
-                    if (deleteContact.ToLower() == People[i].FirstName.ToLower()) 
+                    if (deleteContact.ToLower() == People[i].FirstName.ToLower())
                     {
                         People.RemoveAt(i);
                         Console.WriteLine("Contact is deleted.");
@@ -180,7 +180,7 @@ namespace AddressBookSystem
                     }
                 }
             }
-            else 
+            else
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Address Book is empty.");
@@ -195,11 +195,11 @@ namespace AddressBookSystem
             {
                 if (People.Contains(person))
                 {
-                    dict.Add(firstName, People);
+                    dict.Add(firstName, People); 
                 }
             }
         }
-        public void displayUniqueContact() 
+        public void displayUniqueContact()
         {
             foreach (var item in dict)
             {
@@ -239,7 +239,7 @@ namespace AddressBookSystem
                     {
                         CityAddressBook[city].Add(person);
                     }
-                    foreach (var person in CityAddressBook)
+                    foreach (var person in CityAddressBook) 
                     {
                         foreach (var item in person.Value)
                         {
@@ -248,7 +248,7 @@ namespace AddressBookSystem
                         }
                     }
                     Console.WriteLine("-------------------------------------------");
-                    Console.WriteLine("Total count of people at {0} city: {1}", city, CityAddressBook[city].Count);
+                    Console.WriteLine("Total count of people at {0} city: {1}", city, CityAddressBook[city].Count); 
                     break;
                 case 2:
                     Console.WriteLine("-------------------------------------------");
@@ -275,7 +275,7 @@ namespace AddressBookSystem
                     break;
             }
         }
-        public void SortContacts() 
+        public void SortContacts()
         {
             Console.WriteLine("-------------------------------------------");
             Console.WriteLine("Press 1 to Sort by Name.\nPress 2 to Sort by City");
@@ -299,7 +299,7 @@ namespace AddressBookSystem
                     }
                     break;
                 case 3:
-                    foreach (Person person in People.OrderBy(state => state.Address[2])) 
+                    foreach (Person person in People.OrderBy(state => state.Address[2]))
                     {
                         Console.WriteLine("-------------------------------------------");
                         printContact(person);
@@ -317,6 +317,25 @@ namespace AddressBookSystem
                     break;
             }
         }
+        public void ReadWriteFile() 
+        {
+            string path = @"C:\Users\LENOVO\source\repos\AddressBookSystem\AddressBookSystem\Contacts.txt"; 
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                foreach (Person person in People)
+                {
+                    sw.WriteLine("-------------------------------------------");
+                    sw.WriteLine("Full name : " + person.FirstName + " " + person.LastName);
+                    sw.WriteLine("Mobile number : " + person.PhoneNumber);
+                    sw.WriteLine("Email ID : " + person.Email);
+                    sw.WriteLine("Address : " + person.Address[0]);
+                    sw.WriteLine("City : " + person.Address[1]);
+                    sw.WriteLine("State : " + person.Address[2]);
+                    sw.WriteLine("Zipcode : " + person.Address[3]);
+                }
+                sw.Close();
+                Console.WriteLine(File.ReadAllText(path)); 
+            }
+        }
     }
 }
-
