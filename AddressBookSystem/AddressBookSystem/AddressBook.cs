@@ -8,7 +8,7 @@ namespace AddressBookSystem
 {
     class Person
     {
-        
+       
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
@@ -21,7 +21,7 @@ namespace AddressBookSystem
         Dictionary<string, List<Person>> dict = new Dictionary<string, List<Person>>();
         public void addContact() 
         {
-            Person person = new Person(); 
+            Person person = new Person();
             Console.WriteLine("-------------------------------------------");
             Console.Write("Enter the First Name: ");
             person.FirstName = Console.ReadLine();
@@ -76,7 +76,7 @@ namespace AddressBookSystem
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Following is your Contact List:");
-                foreach (var person in People)
+                foreach (var person in People) 
                 {
                     Console.WriteLine("-------------------------------------------");
                     printContact(person);
@@ -88,23 +88,23 @@ namespace AddressBookSystem
                 Console.WriteLine("Address Book is empty.");
             }
         }
-        public void editContact()
+        public void editContact() 
         {
             string findContact;
             int option;
-            if (People.Count != 0)
+            if (People.Count != 0) 
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Enter the first name you want to edit : ");
-                findContact = Console.ReadLine();
+                findContact = Console.ReadLine(); 
                 foreach (var person in People)
                 {
-                    if (findContact.ToLower() == person.FirstName.ToLower())
+                    if (findContact.ToLower() == person.FirstName.ToLower()) 
                     {
                         Console.WriteLine("1 for First Name.\n2 for Last Name.\n3 for Mobile number.\n 4 for Email ID.");
                         Console.WriteLine("5 for Address.\n6 for City.\n7 for State.\n8 for Zipcode. ");
                         Console.WriteLine("Please enter option number: ");
-                        option = int.Parse(Console.ReadLine()); 
+                        option = int.Parse(Console.ReadLine());
                         switch (option)
                         {
                             case 1:
@@ -152,13 +152,13 @@ namespace AddressBookSystem
                     }
                 }
             }
-            else 
+            else
             {
                 Console.WriteLine("-------------------------------------------");
                 Console.WriteLine("Address Book is empty.");
             }
         }
-        public void deleteContact() 
+        public void deleteContact()
         {
             if (People.Count != 0)
             {
@@ -195,7 +195,7 @@ namespace AddressBookSystem
             {
                 if (People.Contains(person))
                 {
-                    dict.Add(firstName, People); 
+                    dict.Add(firstName, People);
                 }
             }
         }
@@ -210,7 +210,7 @@ namespace AddressBookSystem
                 }
             }
         }
-        public void SearchContact()
+        public void SearchContact() 
         {
             Console.WriteLine("-------------------------------------------");
             Console.WriteLine("Enter the City or State to search contact: ");
@@ -221,7 +221,7 @@ namespace AddressBookSystem
                 printContact(person);
             }
         }
-        public void ViewPersonByCityState()
+        public void ViewPersonByCityState() 
         {
             Dictionary<string, List<Person>> CityAddressBook = new Dictionary<string, List<Person>>();
             Dictionary<string, List<Person>> StateAddressBook = new Dictionary<string, List<Person>>();
@@ -239,7 +239,7 @@ namespace AddressBookSystem
                     {
                         CityAddressBook[city].Add(person);
                     }
-                    foreach (var person in CityAddressBook) 
+                    foreach (var person in CityAddressBook)
                     {
                         foreach (var item in person.Value)
                         {
@@ -248,7 +248,7 @@ namespace AddressBookSystem
                         }
                     }
                     Console.WriteLine("-------------------------------------------");
-                    Console.WriteLine("Total count of people at {0} city: {1}", city, CityAddressBook[city].Count); // this will print the city and count of contacts in that same city
+                    Console.WriteLine("Total count of people at {0} city: {1}", city, CityAddressBook[city].Count);
                     break;
                 case 2:
                     Console.WriteLine("-------------------------------------------");
@@ -268,7 +268,7 @@ namespace AddressBookSystem
                         }
                     }
                     Console.WriteLine("-------------------------------------------");
-                    Console.WriteLine("Total count of people at {0} state: {1}", state, StateAddressBook[state].Count);// this will print the state and count of contacts in that same state
+                    Console.WriteLine("Total count of people at {0} state: {1}", state, StateAddressBook[state].Count);
                     break;
                 default:
                     Console.WriteLine("Wrong input");
@@ -277,13 +277,46 @@ namespace AddressBookSystem
         }
         public void SortContacts() 
         {
-            foreach (Person person in People.OrderBy(name => name.FirstName))
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("Press 1 to Sort by Name.\nPress 2 to Sort by City");
+            Console.WriteLine("Press 3 to Sort by State.\nPress 4 to Sort by ZipCode");
+            Console.WriteLine("Please enter the option: ");
+            int option = Convert.ToInt32(Console.ReadLine());
+            switch (option)
             {
-                Console.WriteLine("-------------------------------------------");
-                printContact(person);
+                case 1:
+                    foreach (Person person in People.OrderBy(name => name.FirstName)) 
+                    {
+                        Console.WriteLine("-------------------------------------------");
+                        printContact(person);
+                    }
+                    break;
+                case 2:
+                    foreach (Person person in People.OrderBy(city => city.Address[1]))
+                    {
+                        Console.WriteLine("-------------------------------------------");
+                        printContact(person);
+                    }
+                    break;
+                case 3:
+                    foreach (Person person in People.OrderBy(state => state.Address[2])) 
+                    {
+                        Console.WriteLine("-------------------------------------------");
+                        printContact(person);
+                    }
+                    break;
+                case 4:
+                    foreach (Person person in People.OrderBy(code => code.Address[3]))
+                    {
+                        Console.WriteLine("-------------------------------------------");
+                        printContact(person);
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Wrong input");
+                    break;
             }
         }
     }
 }
-
 
